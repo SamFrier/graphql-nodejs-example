@@ -1,0 +1,21 @@
+{
+  "name": "graphql-nodejs-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --exec node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^2.6.2",
+    "graphql-yoga": "^1.18.3"
+  },
+  "devDependencies": {
+    "@prisma/cli": "^2.6.2",
+    "nodemon": "^2.0.4"
+  }
+}
