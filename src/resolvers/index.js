@@ -1,14 +1,13 @@
 const Query = require("./query")
 const Mutation = require("./mutation")
+const Link = require("./link")
+const User = require("./user")
 
 const resolvers = {
   Query,
-  Mutation
-  // Link: {
-  //   id: parent => parent.id,
-  //   description: parent => parent.description,
-  //   url: parent => parent.url
-  // }
+  Mutation,
+  Link,
+  User
 }
 
 module.exports = resolvers
