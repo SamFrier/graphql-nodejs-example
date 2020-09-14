@@ -7,4 +7,7 @@ const postedBy = (parent, args, context) =>
     })
     .postedBy()
 
-module.exports = { postedBy }
+const votes = (parent, args, context) =>
+  context.prisma.link.findOne({ where: { id: parent.id } }).votes()
+
+module.exports = { postedBy, votes }

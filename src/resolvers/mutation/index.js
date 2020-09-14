@@ -99,11 +99,39 @@ const deleteLink = async (parent, args, context) => {
   return deletedLink
 }
 
+const vote = async (parent, args, context) => {
+  const userId = getUserId(context)
+
+  const existingVote = await context.prisma.vote.findOne({
+    where: {
+      linkId_userId: {
+        linkId: Number(args.linkId),
+        userId: userId
+      }
+    }
+  })
+
+  if (existingVote) {
+    throw new Error(`Already voted for link: ${args.linkId}`)
+  }
+
+  const newVote = context.prisma.vote.create({
+    data: {
+      user: { connect: { id: userId } },
+      link: { connect: { id: Number(args.linkId) } }
+    }
+  })
+  context.pubsub.publish("NEW_VOTE", newVote)
+
+  return newVote
+}
+
 const Mutation = {
   signup,
   login,
   post,
   updateLink,
-  deleteLink
+  deleteLink,
+  vote
 }
 module.exports = Mutation

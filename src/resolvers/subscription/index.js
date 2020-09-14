@@ -6,4 +6,14 @@ const newLink = {
   resolve: payload => payload
 }
 
-module.exports = { newLink }
+const newVoteSubscribe = (parent, args, context) =>
+  context.pubsub.asyncIterator("NEW_VOTE")
+
+const newVote = {
+  subscribe: newVoteSubscribe,
+  resolve: payload => {
+    return payload
+  }
+}
+
+module.exports = { newLink, newVote }
