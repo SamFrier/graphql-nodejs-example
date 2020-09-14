@@ -24,3 +24,9 @@ npx prisma studio --experimental
 ```bash
 npm start
 ```
+
+## TODO
+
+- Improve input validation and error handling
+- Add tests!
+- Additional functionality?

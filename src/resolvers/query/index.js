@@ -10,11 +10,16 @@ const feed = async (parent, args, context) => {
       }
     : {}
 
-  return await context.prisma.link.findMany({
+  const links = await context.prisma.link.findMany({
     where: whereClause,
     skip: args.skip,
-    take: args.take
+    take: args.take,
+    orderBy: args.orderBy
   })
+
+  const count = await context.prisma.link.count({ where: whereClause })
+
+  return { links, count }
 }
 
 const link = async (parent, args, context) => {
