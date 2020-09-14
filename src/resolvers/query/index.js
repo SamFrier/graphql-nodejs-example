@@ -1,6 +1,21 @@
 const info = () => `This is the API of a Hackernews clone`
 
-const feed = async (parent, args, context) => context.prisma.link.findMany()
+const feed = async (parent, args, context) => {
+  const whereClause = args.filter
+    ? {
+        OR: [
+          { description: { contains: args.filter } },
+          { url: { contains: args.filter } }
+        ]
+      }
+    : {}
+
+  return await context.prisma.link.findMany({
+    where: whereClause,
+    skip: args.skip,
+    take: args.take
+  })
+}
 
 const link = async (parent, args, context) => {
   const idAsInt = parseInt(args.id)
